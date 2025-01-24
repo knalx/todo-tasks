@@ -1,0 +1,60 @@
+<div class="task-list mt-8">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-xl font-bold">Task List</h2>
+    <div class="flex gap-4">
+      <input
+        type="text"
+        class="px-3 py-1 border rounded"
+        placeholder="Search tasks"
+        (input)="onSearch($event)"
+      />
+      <select
+        class="px-3 py-1 border rounded"
+        (change)="onFilterChange($event)"
+      >
+        <option value="all">All Tasks</option>
+        <option value="completed">Completed</option>
+        <option value="active">Active</option>
+      </select>
+    </div>
+  </div>
+  <div class="space-y-4">
+    @for (task of tasks$ | async; track task.id) {
+      <div
+        class="task-item p-4 bg-white rounded-lg shadow-sm flex items-start justify-between"
+      >
+        <div class="flex items-start gap-3">
+          <input
+            type="checkbox"
+            [checked]="task.completed"
+            (change)="toggleTask(task.id!)"
+            class="mt-1"
+          />
+          <div>
+            <h3 class="font-medium" [class.line-through]="task.completed">
+              {{ task.title }}
+            </h3>
+            <p class="text-gray-600">{{ task.description }}</p>
+          </div>
+        </div>
+        <button
+          class="text-gray-500 hover:text-red-500"
+          (click)="deleteTask(task.id!)"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
+      </div>
+    }
+  </div>
+</div>
