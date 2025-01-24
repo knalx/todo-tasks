@@ -1,0 +1,33 @@
+<div class="task-form p-4 bg-white rounded-lg shadow-sm">
+  <h2 class="text-xl font-bold mb-4">Create New Task</h2>
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <div class="mb-4">
+      <label class="block text-sm font-medium mb-1">Task Title</label>
+      <input
+        type="text"
+        formControlName="title"
+        class="w-full p-2 border rounded"
+        placeholder="Enter task title"
+      />
+    </div>
+    <div class="mb-4">
+      <label class="block text-sm font-medium mb-1">Description</label>
+      <textarea
+        formControlName="description"
+        class="w-full p-2 border rounded"
+        rows="3"
+        placeholder="Enter task description"
+      ></textarea>
+    </div>
+    <div class="flex md:flex md:flex-grow flex-row justify-end space-x-1">
+      <button
+        type="submit"
+        class="px-4 py-2 bg-black text-white rounded hover:bg-gray-800"
+        [disabled]="!taskForm.valid"
+        where
+      >
+        Create Task
+      </button>
+    </div>
+  </form>
+</div>
